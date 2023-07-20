@@ -160,7 +160,7 @@ function updateFooter(lb: LbKey): void {
   } else {
     $(`#leaderboardsWrapper table.${side} tfoot`).html(`
     <tr>
-      <td colspan="6" style="text-align:center;">Not qualified</>
+      <td colspan="6" style="text-align:center;">Not qualified (min speed required: --)</>
     </tr>
     `);
   }
@@ -464,6 +464,18 @@ async function update(): Promise<void> {
         });
       })
     );
+
+    leaderboardRequests
+      .push
+      // ...timeModes.map(async (mode2) => {
+      //   return Ape.leaderboards.getRank({
+      //     language: currentLanguage,
+      //     mode: "time",
+      //     mode2,
+      //     ...getDailyLeaderboardQuery(),
+      //   });
+      // })
+      ();
   }
 
   const responses = await Promise.all(leaderboardRequests);

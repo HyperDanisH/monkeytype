@@ -24,6 +24,7 @@ export async function get(
     .skip(skip)
     .limit(limit)
     .toArray();
+
   return preset;
 }
 
@@ -50,6 +51,8 @@ export async function getRank(
     return res;
   }
 }
+
+export async function getMinRankInLeaderboard() {}
 
 export async function update(
   mode: string,

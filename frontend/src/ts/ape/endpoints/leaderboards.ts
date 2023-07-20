@@ -59,4 +59,6 @@ export default class Leaderboards {
 
     return await this.httpClient.get(endpointPath, { searchQuery });
   }
+
+  async getMinRankInLeaderboard() {}
 }
