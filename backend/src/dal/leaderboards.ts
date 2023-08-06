@@ -52,7 +52,18 @@ export async function getRank(
   }
 }
 
-export async function getMinRankInLeaderboard() {}
+export async function getMinRankInLeaderboard(
+  mode: string,
+  mode2: string,
+  language: string
+) {
+  const res = await db
+    .collection(`leaderboards.${language}.${mode}.${mode2}`)
+    .countDocuments();
+
+  console.log(res);
+  return res;
+}
 
 export async function update(
   mode: string,

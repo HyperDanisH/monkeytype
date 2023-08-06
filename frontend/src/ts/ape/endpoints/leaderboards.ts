@@ -55,10 +55,20 @@ export default class Leaderboards {
       ...(includeDaysBefore && { daysBefore }),
     };
 
+    console.log(searchQuery);
+
     const endpointPath = `${BASE_PATH}${isDaily ? "/daily" : ""}/rank`;
 
     return await this.httpClient.get(endpointPath, { searchQuery });
   }
 
-  async getMinRankInLeaderboard() {}
+  async getMinRankInLeaderboard(query: LeaderboardQuery) {
+    // const { language, mode, mode2, isDaily, daysBefore } = query;
+
+    // const endpointPath = `${BASE_PATH}/min-rank`
+
+    console.log(query);
+
+    // return await this.httpClient.get(endpointPath);
+  }
 }

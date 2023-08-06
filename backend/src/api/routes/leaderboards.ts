@@ -67,6 +67,16 @@ router.get(
 );
 
 router.get(
+  "/min-rank",
+  authenticateRequest({ acceptApeKeys: true }),
+  withApeRateLimiter(RateLimit.leaderboardsGet),
+  validateRequest({
+    query: BASE_LEADERBOARD_VALIDATION_SCHEMA,
+  }),
+  asyncHandler(LeaderboardController.getMinRankInLeaderboard)
+);
+
+router.get(
   "/daily",
   requireDailyLeaderboardsEnabled,
   authenticateRequest({ isPublic: true }),

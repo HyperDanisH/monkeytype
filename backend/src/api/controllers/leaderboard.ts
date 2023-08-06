@@ -75,6 +75,19 @@ export async function getRankFromLeaderboard(
   return new MonkeyResponse("Rank retrieved", data);
 }
 
+export async function getMinRankInLeaderboard(
+  req: MonkeyTypes.Request
+): Promise<MonkeyResponse> {
+  const { language, mode, mode2 } = req.query;
+
+  const data = await LeaderboardsDAL.getMinRankInLeaderboard(
+    mode as string,
+    mode2 as string,
+    language as string
+  );
+  return new MonkeyResponse("Rank retrieved", data);
+}
+
 function getDailyLeaderboardWithError(
   req: MonkeyTypes.Request
 ): DailyLeaderboards.DailyLeaderboard {
