@@ -62,5 +62,6 @@ export function collection<T>(collectionName: string): Collection<WithId<T>> {
     throw new MonkeyError(500, "Database is not initialized.");
   }
 
+  // console.log(db.collection<WithId<T>>(collectionName).estimatedDocumentCount())
   return db.collection<WithId<T>>(collectionName);
 }

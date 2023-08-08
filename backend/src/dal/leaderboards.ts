@@ -55,13 +55,14 @@ export async function getRank(
 export async function getMinRankInLeaderboard(
   mode: string,
   mode2: string,
-  language: string
+  language: string,
+  uid: string
 ) {
   const res = await db
     .collection(`leaderboards.${language}.${mode}.${mode2}`)
-    .countDocuments();
+    .estimatedDocumentCount();
+  // console.log(res)
 
-  console.log(res);
   return res;
 }
 

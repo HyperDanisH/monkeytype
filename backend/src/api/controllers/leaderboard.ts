@@ -79,11 +79,13 @@ export async function getMinRankInLeaderboard(
   req: MonkeyTypes.Request
 ): Promise<MonkeyResponse> {
   const { language, mode, mode2 } = req.query;
+  const { uid } = req.ctx.decodedToken;
 
   const data = await LeaderboardsDAL.getMinRankInLeaderboard(
     mode as string,
     mode2 as string,
-    language as string
+    language as string,
+    uid
   );
   return new MonkeyResponse("Rank retrieved", data);
 }
@@ -146,6 +148,18 @@ export async function getDailyLeaderboardRank(
   );
 
   return new MonkeyResponse("Daily leaderboard rank retrieved", rank);
+}
+
+export async function getDailyMinRankInLeaderboard(
+  req: MonkeyTypes.Request
+): Promise<MonkeyResponse> {
+  const { language, mode, mode2 } = req.query;
+  const { uid } = req.ctx.decodedToken;
+
+  const dailyLeaderboard = getDailyLeaderboardWithError(req);
+
+  const data = await dailyLeaderboard.getDailyMinRankInLeaderboard();
+  return new MonkeyResponse("Rank retrieved", data);
 }
 
 function getWeeklyXpLeaderboardWithError(

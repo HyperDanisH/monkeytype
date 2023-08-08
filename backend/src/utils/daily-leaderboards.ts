@@ -2,6 +2,7 @@ import _ from "lodash";
 import * as RedisClient from "../init/redis";
 import LaterQueue from "../queues/later-queue";
 import { getCurrentDayTimestamp, matchesAPattern, kogascore } from "./misc";
+import { getRank } from "../dal/leaderboards";
 
 interface DailyLeaderboardEntry {
   uid: string;
@@ -163,6 +164,8 @@ export class DailyLeaderboard {
       .hget(leaderboardResultsKey, uid)
       .exec();
 
+    console.log(count);
+
     if (rank === null) {
       return null;
     }
@@ -173,6 +176,8 @@ export class DailyLeaderboard {
       ...JSON.parse(result ?? "null"),
     };
   }
+
+  public async getDailyMinRankInLeaderboard() {}
 }
 
 export async function purgeUserFromDailyLeaderboards(

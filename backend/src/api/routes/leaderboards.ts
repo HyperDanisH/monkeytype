@@ -98,6 +98,16 @@ router.get(
   asyncHandler(LeaderboardController.getDailyLeaderboardRank)
 );
 
+router.get(
+  "/daily/min-rank",
+  authenticateRequest({ acceptApeKeys: true }),
+  withApeRateLimiter(RateLimit.leaderboardsGet),
+  validateRequest({
+    query: BASE_LEADERBOARD_VALIDATION_SCHEMA,
+  }),
+  asyncHandler(LeaderboardController.getDailyMinRankInLeaderboard)
+);
+
 const BASE_XP_LEADERBOARD_VALIDATION_SCHEMA = {
   skip: joi.number().min(0),
   limit: joi.number().min(0).max(50),
